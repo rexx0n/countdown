@@ -4,19 +4,21 @@
         <div class="block" v-if="timeRemaining.days >= 0">
             <div>
                 <h1>Осталось</h1>
+                <h2 class="days">{{ timeRemaining.days }} Дней </h2>
                 <div class="time">
-                    <h2>Дней: {{ timeRemaining.days }}</h2>
-                    <h2 :class="{none: isOnlyDays, all: isAll}" >Часов: {{ timeRemaining.hours }}</h2>
-                    <h2 :class="{none: isOnlyDays, all: isAll}" >Минут: {{ timeRemaining.minutes }}</h2>
-                    <h2 :class="{none: isOnlyDays, all: isAll}" >Секунд: {{ timeRemaining.seconds }}</h2>
+                    <h2 class="column" >{{timeRemaining.month}}<span>месяцев</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.hours }} <span>Часов</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.minutes }} <span>Минут</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.seconds }} <span>Секунд</span></h2>
                 </div>
             </div>
             <div>
                 <h1>Прошло</h1>
+                <h2 class="days">Дней: {{ elapsedTime.days }}</h2>
                 <div class="time">
-                    <h2>Дней: {{ elapsedTime.days }}</h2>
-                    <h2 :class="{none: isOnlyDays, all: isAll}">Часов: {{ elapsedTime.hours }}</h2>
-                    <h2 :class="{none: isOnlyDays, all: isAll}">Минут: {{ elapsedTime.minutes }}</h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}">{{ elapsedTime.month }} <span>Месяцев</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}">{{ elapsedTime.hours }} <span>Часов</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}">{{ elapsedTime.minutes }} <span>Минут</span></h2>
                 </div>
             </div>
 
@@ -41,7 +43,8 @@ export default {
                 days: 0,
                 hours: 0,
                 minutes: 0,
-                seconds: 0
+                seconds: 0,
+                month: 0,
             },
             countdownInterval: null,
             startDate: new Date('2022-11-21T08:00:00'), // Здесь указываем начальную дату
@@ -49,6 +52,7 @@ export default {
                 days: 0,
                 hours: 0,
                 minutes: 0,
+                month:0,
             },
             elapsedInterval: null,
         };
@@ -84,6 +88,8 @@ export default {
             this.elapsedTime.days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             this.elapsedTime.hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
             this.elapsedTime.minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            this.elapsedTime.month = Math.floor((this.elapsedTime.days / 30));
+
         },
         calculateCountdown() {
             const currentTime = new Date();
@@ -93,6 +99,7 @@ export default {
                 this.timeRemaining.hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
                 this.timeRemaining.minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
                 this.timeRemaining.seconds = Math.floor((timeDifference / 1000) % 60);
+                this.timeRemaining.month = Math.floor(this.timeRemaining.days / 25)
             } else {
                 // Если время истекло, останавливаем интервал
                 clearInterval(this.countdownInterval);
@@ -114,18 +121,26 @@ body {
     flex-direction: column;
     gap: 20px;
 }
+.column {
+    display: flex;
+    flex-direction: column;
+}
 .time {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    margin-top: 5px;
+}
+.days {
+    font-size: 30px;
 }
 h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
 }
 .all {
-    display: block;
+    display: flex;
 }
 .none {
     display: none;
@@ -136,10 +151,11 @@ button {
     background: none;
     color: white;
     border-radius:20px;
+    margin: 5px;
 }
 h1 {
-  font-size: 24px;
-    margin-bottom: 30px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 .panel {
   border: 1px solid white;
@@ -151,5 +167,8 @@ h1 {
   background: rgba(255, 255, 255, 0.2);
 
   backdrop-filter: blur(8px);
+}
+button:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 </style>
