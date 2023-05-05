@@ -6,7 +6,7 @@
                 <h1>Осталось</h1>
                 <h2 class="days">{{ timeRemaining.days }} Дней </h2>
                 <div class="time">
-                    <h2 class="column" >{{timeRemaining.month}}<span>месяцев</span></h2>
+                    <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{timeRemaining.month}}<span>месяцев</span></h2>
                     <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.hours }} <span>Часов</span></h2>
                     <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.minutes }} <span>Минут</span></h2>
                     <h2 class="column" :class="{none: isOnlyDays, all: isAll}" >{{ timeRemaining.seconds }} <span>Секунд</span></h2>
@@ -117,7 +117,7 @@ body {
     background-size: auto;
     margin: 10px;
     height: 100%;
-    background: url(https://images.wallpaperscraft.ru/image/single/fon_piatna_temnyj_91678_1920x1080.jpg) repeat;
+    background: url(https://images.wallpaperscraft.ru/image/single/fon_razmytie_ottenok_377325_3840x2400.jpg) repeat;
 }
 .block {
     margin-bottom: 20px;
