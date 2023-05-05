@@ -109,6 +109,10 @@ export default {
 };
 </script>
 <style>
+.count {
+    color: white;
+    font-size: 30px;
+}
 body {
     background-size: auto;
     margin: 10px;
@@ -160,7 +164,7 @@ h1 {
 .panel {
   border: 1px solid white;
   max-width: 600px;
-    margin: 100px auto auto;
+    margin: 65px auto auto;
     color: white;
   padding: 20px;
   border-radius: 20px;
