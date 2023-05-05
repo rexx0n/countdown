@@ -116,9 +116,9 @@ export default {
     padding-bottom:22.25%;
 }
 .video__media {
-    position: absolute;
+    position: fixed;
     top: -89px;
-    left: -714px;
+    left: -739px;
     height: auto;
 }
 body {
