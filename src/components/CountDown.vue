@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div  class="panel">
+      <div class="video">
+          <video class="video__media" autoplay muted loop src="../../src/assets/mylivewallpapers.com-Slow-Mo-Ocean.mp4"></video>
+      </div>
+    <div class="panel">
         <div class="block" v-if="timeRemaining.days >= 0">
             <div>
                 <h1>Осталось</h1>
@@ -109,11 +112,17 @@ export default {
 };
 </script>
 <style>
-.count {
-    color: white;
-    font-size: 30px;
+.video {
+    padding-bottom:22.25%;
+}
+.video__media {
+    position: absolute;
+    top: -89px;
+    left: -714px;
+    height: auto;
 }
 body {
+    overflow: hidden;
     background-size: auto;
     margin: 10px;
     height: 100%;
